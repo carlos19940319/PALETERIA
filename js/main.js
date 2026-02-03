@@ -1,3 +1,0 @@
-console.log("JS cargado correctamente");
-document.querySelectorAll('.tarjeta-img').forEach(img=>{img.addEventListener('click',()=>{const nuevaImagen=prompt("Ingresa la ruta de la nueva imagen:");if(nuevaImagen){img.style.opacity="0";setTimeout(()=>{img.src=nuevaImagen;img.style.opacity="1";},200);}});});
-window.addEventListener('load',()=>{document.querySelectorAll('.tarjeta').forEach((tarjeta,index)=>{setTimeout(()=>{tarjeta.style.opacity='1';tarjeta.style.transform='scale(1)';},index*150);});});
