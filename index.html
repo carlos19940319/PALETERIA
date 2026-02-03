@@ -55,27 +55,26 @@
 
   <div class="grid">
     <video controls>
-      <source src="video/R1.mp4" type="video/mp4">
+      <source src="video/r1.mp4" type="video/mp4">
       Tu navegador no soporta video HTML5.
     </video>
 
     <video controls>
-      <source src="video/R1.mp4" type="video/mp4">
+      <source src="video/r1.mp4" type="video/mp4">
       Tu navegador no soporta video HTML5.
     </video>
 
     <video controls>
-      <source src="video/R1.mp4" type="video/mp4">
+      <source src="video/r1.mp4" type="video/mp4">
       Tu navegador no soporta video HTML5.
     </video>
 
     <video controls>
-      <source src="video/R1.mp4" type="video/mp4">
+      <source src="video/r1.mp4" type="video/mp4">
       Tu navegador no soporta video HTML5.
     </video>
   </div>
 </section>
-
 
 
 
@@ -113,19 +112,92 @@
 
 <script src="script.js"></script>
 <!-- AUDIO -->
-<audio id="bgMusic" loop>
-  <source src="video/ron.mp3" type="audio/mpeg">
-  Tu navegador no soporta audio.
-</audio>
+<audio id="bgMusic"></audio>
 
+<div class="music-player">
+  <button onclick="prevTrack()">⏮</button>
+  <button onclick="toggleMusic()" id="playIcon">▶️</button>
+  <button onclick="nextTrack()">⏭</button>
+</div>
+<style>
+.music-player {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  gap: 10px;
+  background: rgba(0,0,0,0.75);
+  padding: 12px 14px;
+  border-radius: 40px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,.6);
+  z-index: 9999;
+}
+
+.music-player button {
+  background: none;
+  border: none;
+  color: gold;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform .2s, color .2s;
+}
+
+.music-player button:hover {
+  transform: scale(1.2);
+  color: #fff;
+}
+</style>
 <script>
-  document.addEventListener("click", function () {
-    const music = document.getElementById("bgMusic");
+  const playlist = [
+    "video/ron.mp3",
+    "video/ron2.mp3",
+    "video/ron3.mp3"
+  ];
+
+  let currentTrack = 0;
+  const music = document.getElementById("bgMusic");
+  const playIcon = document.getElementById("playIcon");
+
+  music.src = playlist[currentTrack];
+  music.volume = 0.6;
+
+  // PLAY / PAUSE
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+      playIcon.textContent = "⏸";
+    } else {
+      music.pause();
+      playIcon.textContent = "▶️";
+    }
+  }
+
+  // SIGUIENTE CANCIÓN
+  function nextTrack() {
+    currentTrack = (currentTrack + 1) % playlist.length;
+    music.src = playlist[currentTrack];
     music.play();
+    playIcon.textContent = "⏸";
+  }
+
+  // CANCIÓN ANTERIOR
+  function prevTrack() {
+    currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+    music.src = playlist[currentTrack];
+    music.play();
+    playIcon.textContent = "⏸";
+  }
+
+  // TU LÓGICA ORIGINAL: reproducir al primer clic
+  document.addEventListener("click", function () {
+    music.play().then(() => {
+      playIcon.textContent = "⏸";
+    }).catch(()=>{});
   }, { once: true });
 </script>
 
+
+
 </body>
 </html>
-
-
