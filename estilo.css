@@ -81,7 +81,7 @@ nav a:hover::after{
   height:90vh;
   background:
     linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.9)),
-    url("img/FONDO.png");
+    url("img/FONDOO.png");
   background-size:cover;
   background-position:center;
   display:flex;
@@ -151,17 +151,127 @@ iframe{
   border:3px solid #d4af37;
 }
 
-/* FOTOS */
-.fotos img{
-  width:100%;
-  border-radius:20px;
-  transition:transform 0.4s, box-shadow 0.4s;
+/* ===== LIBRO ===== */
+.book{
+  max-width:900px;
+  margin:0 auto;
+  padding:30px;
+  background:#140a0a;
+  border-radius:30px;
+  box-shadow:0 30px 60px rgba(0,0,0,0.7);
+  border:2px solid #d4af37;
 }
 
-.fotos img:hover{
-  transform:scale(1.05);
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+/* CONTENEDOR DE PÁGINAS */
+.pages{
+  position:relative;
+  min-height:320px;
 }
+
+/* CADA PÁGINA */
+.page{
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+/* PÁGINA ACTIVA */
+.page.active{
+  display:grid;
+}
+
+/* =================================================
+   📖 GALERÍA TIPO LIBRO – UNA IMAGEN POR PÁGINA
+================================================= */
+
+/* CONTENEDOR DEL LIBRO */
+.book{
+  position:relative;
+  max-width:900px;
+  margin:0 auto;
+  perspective:2200px;
+}
+
+/* HOJA */
+.sheet{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:380px;
+  transform-style:preserve-3d;
+  transition:transform 1s ease;
+  z-index:1;
+}
+
+/* HOJA ACTIVA */
+.sheet.active{
+  z-index:3;
+}
+
+/* HOJA GIRADA */
+.sheet.flipped{
+  transform:rotateY(-180deg);
+  z-index:2;
+}
+
+/* ===== PÁGINA ===== */
+.page{
+  position:absolute;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  backface-visibility:hidden;
+  border-radius:22px;
+  background:#000;
+}
+
+/* FRENTE */
+.page.front{
+  left:0;
+}
+
+/* REVERSO */
+.page.back{
+  left:0;
+  transform:rotateY(180deg);
+}
+
+/* ===== GALERÍA SIMPLE ===== */
+.gallery-simple{
+  max-width:600px;
+  margin:0 auto;
+  text-align:center;
+}
+
+/* IMAGEN */
+.gallery-simple img{
+  width:100%;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:22px;
+  border:2px solid rgba(212,175,55,0.65);
+  box-shadow:0 15px 30px rgba(0,0,0,0.6);
+  transition:opacity .4s ease, transform .4s ease;
+}
+
+/* CONTROLES */
+.controls{
+  margin-top:25px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.controls button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:600;
+  background:linear-gradient(135deg,#d4af37,#f5e28a);
+  box-shadow:0 8px 20px rgba(212,175,55,0.4);
+}
+
 
 /* FOOTER */
 footer{
@@ -173,14 +283,28 @@ footer{
 }
 video{
   width:100%;
-  max-width:450px;   /* 👈 BAJA ESTE VALOR */
-  aspect-ratio:16/9; /* 👈 mantiene proporción */
-  margin:0 auto;     /* 👈 lo centra */
+  max-width:450px;
+  aspect-ratio:16/9;
+  margin:0 auto;
   display:block;
   border-radius:18px;
   border:2px solid #d4af37;
   box-shadow:0 15px 30px rgba(0,0,0,0.6);
 }
+#videos{
+  position:relative;
+  padding:80px 40px;
+  border-radius:30px;
+  overflow:hidden;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.9)),
+    url("img/15.jpg") center/cover no-repeat;
+
+  box-shadow:0 30px 60px rgba(0,0,0,0.7);
+}
+
+
 @media(max-width:768px){
   video{
     max-width:100%;
@@ -365,4 +489,3 @@ video{
     line-height:1.6;
   }
 }
-
